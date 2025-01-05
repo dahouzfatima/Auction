@@ -14,7 +14,7 @@ class ObjetController extends Controller
      */
     public function index()
     {
-        $objets = Objet::all(); // Récupérer tous les objets
+        $objets = Objet::paginate(9); // Récupérer tous les objets
         return response()->json($objets);
     }
 
