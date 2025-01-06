@@ -13,11 +13,9 @@ const Banner = () => {
 
             {/* Content */}
             <div className="z-1 left-0 absolute font-light  text-left ml-10 font-serif">
-                <h1 className="text-6xl  mb-4 font-bold">Art Catalog</h1>
+                <h1 className="text-6xl  mb-4 font-bold">Auction Catalog</h1>
                 <p className="text-lg max-w-2xl font-sans">
-                    An art catalog is a curated assembly of artworks gathered by an
-                    individual, institution, or group, often reflecting the collector's
-                    interests, tastes, or a specific theme.
+                    An auction catalog is a curated collection of items available for bidding, showcasing unique assets, collectibles, or valuables, tailored to attract buyers and reflect the diversity of the auction.
                 </p>
             </div>
 
