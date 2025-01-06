@@ -3,13 +3,14 @@ import Navbar from "../components/NavBar";
 import Objet from "../components/Objet";
 import Banner from "../components/Banner";
 import { Footer } from "../components/Footer";
+import { userStateContext } from "../contexts/ContextProvider";
 
 export default function Preview() {
+    const {currentUser}=userStateContext();
     const [objets, setObjets] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
-
     // Fetch objects from the server
     const fetchObjets = () => {
         // Inclure le terme de recherche et la page dans la requête
