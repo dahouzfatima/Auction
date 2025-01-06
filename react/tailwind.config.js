@@ -5,7 +5,12 @@ module.exports = {
     './public/index.html',       // Si vous utilisez le fichier HTML dans public
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'], // Par défaut pour le texte
+        serif: ['Playfair Display', 'serif'], // Pour les titres
+      },
+    },
   },
   plugins: [],
 };

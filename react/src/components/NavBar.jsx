@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { links } from "./MyLinks";
 
-const Header = () => {
+export default function Header({ SearchTerm, handleSearch }) {
     const [hoverMenu, setHoverMenu] = useState("");
 
     return (
@@ -16,7 +16,10 @@ const Header = () => {
                 {/* Search Bar */}
                 <div className="flex-1 mx-4 text-center ">
                     <input
+                        name="search"
                         type="text"
+                        value={SearchTerm}
+                        onChange={handleSearch}
                         placeholder="Search your product here"
                         className="md:w-[50%] w-full border border-gray-300 rounded-full py-2 px-4 focus:outline-none"
                     />
@@ -74,7 +77,7 @@ const Header = () => {
                                                 key={item.name}
                                                 className="px-4 py-2 hover:bg-gray-100"
                                             >
-                                                
+
                                                 <Link to={item.link} className="block text-gray-700">
                                                     {item.name}
                                                 </Link>
@@ -91,4 +94,3 @@ const Header = () => {
     );
 };
 
-export default Header;

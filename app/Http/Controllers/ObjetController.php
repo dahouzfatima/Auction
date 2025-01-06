@@ -12,9 +12,14 @@ class ObjetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $objets = Objet::paginate(9); // Récupérer tous les objets
+        $query=Objet::query();
+        if($request->has('search')){
+            $search=$request->input('search');
+            $query->where('titre','like','%'.$search.'%');
+        }
+        $objets = $query->paginate(8); // Récupérer tous les objets
         return response()->json($objets);
     }
 
