@@ -42,26 +42,26 @@ export default function SignUp() {
                 <form onSubmit={onSubmit} action="#" className="w-full ">
                     <h1 className="text-[36px] font-extrabold">Register</h1>
                     <div className="input-box">
-                        <input type="text" placeholder="First Name" required name="firstName" value={firstName}
+                        <input type="text" placeholder="First Name"  name="firstName" value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}></input>
                         <i class='bx bxs-user'></i>
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="Last Name" required name="lastName" value={lastName}
+                        <input type="text" placeholder="Last Name"  name="lastName" value={lastName}
                             onChange={(e) => setLastName(e.target.value)}></input>
                         <i class='bx bxs-lock-alt'></i>
                     </div>
                     <div className="input-box">
-                        <input type="email" placeholder="Email" required name="email" value={email}
+                        <input type="email" placeholder="Email"  name="email" value={email}
                             onChange={(e) => setEmail(e.target.value)}></input>
                         <i class='bx bxs-envelope'></i>                        </div>
                     <div className="input-box">
-                        <input type="password" placeholder="Password" required name="password" value={password}
+                        <input type="password" placeholder="Password"  name="password" value={password}
                             onChange={(e) => setPassword(e.target.value)}></input>
                         <i class='bx bxs-lock-alt'></i>
                     </div>
                     <div className="input-box">
-                        <input type="password" placeholder="Password Confirmation" required name="password-confirmation" value={passwordConfirrmation}
+                        <input type="password" placeholder="Password Confirmation"  name="password-confirmation" value={passwordConfirrmation}
                             onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
                         <i class='bx bxs-lock-alt'></i>
                     </div>
