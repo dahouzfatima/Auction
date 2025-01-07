@@ -24,5 +24,9 @@ const router = createBrowserRouter([
         path:'/Auth',
         element:<Authentification />
     }
+    ,{
+        path:'/preview/dashboard',
+        element:<Authentification />
+    }
 ])
 export default router;

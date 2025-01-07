@@ -33,7 +33,7 @@ export default function Header({ SearchTerm, handleSearch }) {
                     </div>
                     <div>
                         <Link
-                            to="/account"
+                            to="/preview/dashboard"
                             className="bg-black text-white py-2 px-4 rounded-full hover:bg-white hover:text-black border border-black"
                         >
                             My Account

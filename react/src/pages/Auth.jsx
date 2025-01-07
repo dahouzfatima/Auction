@@ -94,7 +94,7 @@ export default function Authentification() {
                         {
                             error.__html && (<div className="bg-red-500 rounded py-2 px-3 text-white" dangerouslySetInnerHTML={error}></div>)
                         }
-                        <button type="submit" className="w-full  font-bold  bg-[#353b6c] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md">
+                        <button type="submit" className="w-full  font-bold  bg-[#5a3920] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md">
                             Login
                         </button>
                         <h1 className="text-[#333] mt-[5px] underline">Forget Password ?</h1>
@@ -104,12 +104,12 @@ export default function Authentification() {
                     <div className="toggle-panel toggle-left my-1  absolute w-[50%] h-full  text-[#fff] flex flex-col items-center justify-center">
                         <h1 className="text-[36px] font-extrabold">Welcome !</h1>
                         <p className="">Don't have an account ?</p>
-                        <button className="w-[160px] font-bold  bg-[#353b6c] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md" onClick={RegisterClick}>Register</button>
+                        <button className="w-[160px] font-bold  bg-black h-[48px] text-center cursor-pointer text-white mt-4 rounded-md" onClick={RegisterClick}>Register</button>
                     </div>
                     <div className="toggle-panel toggle-right my-1 absolute w-[50%] h-full  text-[#fff] flex flex-col items-center justify-center">
                         <h1 className="text-[36px] font-extrabold">Welcome Back!</h1>
                         <p className="">Already have an account ?</p>
-                        <button className="w-[160px] font-bold  bg-[#353b6c] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md" onClick={LoginClick}>Login</button>
+                        <button className="w-[160px] font-bold  bg-black h-[48px] text-center cursor-pointer text-white mt-4 rounded-md" onClick={LoginClick}>Login</button>
                     </div>
                 </div>
                 <div className="   form-box register absolute w-[50%]   right-0 flex items-center text-center px-[40px]">
@@ -142,7 +142,7 @@ export default function Authentification() {
                         {
                             error.__html && (<div className="bg-red-500 rounded py-2 px-3 text-white" dangerouslySetInnerHTML={error}></div>)
                         }
-                        <button className="w-full  font-bold  bg-[#353b6c] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md" type="submit"  >
+                        <button className="w-full  font-bold  bg-[#5a3920] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md" type="submit"  >
                             Register
                         </button>
                     </form>
