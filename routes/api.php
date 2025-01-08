@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EnchereController;
 use App\Http\Controllers\ObjetController;
 use App\Models\Objet;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ Route::middleware('auth:sanctum')->group(
     function(){
         Route::post('/logout',[AuthController::class,'logout']);
         Route::get('/me',[AuthController::class,'me']);
+        Route::get('/objets/{id}', [ObjetController::class, 'show']);
+        Route::post('/objets/{id}/bid', [EnchereController::class, 'store']); 
     }
 );
 

@@ -55,6 +55,11 @@ public function getUserEncheres($userId)
     {
         //
     }
+    public function latestObjects(Request $request)
+    {
+        $objets = Objet::orderBy('dateDepart', 'desc')->take(10)->get();
+        return response()->json($objets);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -75,7 +80,10 @@ public function getUserEncheres($userId)
      */
     public function show($id)
     {
-        //
+        // Utilisation de findOrFail pour récupérer l'objet ou renvoyer une erreur 404
+        $objet = Objet::findOrFail($id);
+
+        return response()->json($objet);
     }
 
     /**

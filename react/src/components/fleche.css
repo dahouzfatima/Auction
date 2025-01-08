@@ -1,0 +1,44 @@
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: #1c1c1c;
+  border-radius: 50%; 
+  width: 30px; /* Largeur de la flèche */
+  height: 30px; /* Hauteur de la flèche */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+  left: 0px; /* Positionnement de la flèche précédente */
+}
+
+.swiper-button-next {
+  right: 0px; /* Positionnement de la flèche suivante */
+}
+
+/* Flèche iconique à l'intérieur */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  content: ''; 
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg); /* Création de la flèche */
+}
+
+/* Flèche précédente (rotation à gauche) */
+.swiper-button-next::after {
+  transform: rotate(-135deg); /* Flèche vers la gauche */
+}
+
+/* Flèche suivante (rotation à droite) */
+.swiper-button-prev::after {
+  transform: rotate(45deg); /* Flèche vers la droite */
+}

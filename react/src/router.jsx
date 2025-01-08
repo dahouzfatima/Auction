@@ -4,17 +4,19 @@ import ObjetX from "./components/Objet";
 import Preview from "./pages/preview";
 import Authentification from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import PlaceBid from "./pages/PlaceBid";
+import Homepage from "./pages/Homepage";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />
+        element: <Homepage />
     }, {
         path: '/preview',
         element: <Preview />
     }, {
         path: '/login',
-        element: <Authentification/>
+        element: <Authentification />
     }, {
         path: '/signup',
         element: <Authentification />
@@ -25,6 +27,13 @@ const router = createBrowserRouter([
     }
     , {
         path: '/preview/dashboard',
-        element: <Dashboard />}
+        element: <Dashboard />
+    }
+    ,
+    {
+        path: '/details/:id',
+        element: <PlaceBid />
+    }
+
 ])
 export default router;

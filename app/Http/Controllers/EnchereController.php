@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enchere;
+use App\Models\Objet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EnchereController extends Controller
 {
@@ -32,9 +35,44 @@ class EnchereController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        // Validation des données
+        $validator = Validator::make($request->all(), [
+            'prix' => 'required|numeric|min:0',
+            'prop_id' => 'required|integer|exists:users,id', // Vérifie que l'utilisateur existe
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Vérifie que l'objet existe
+        $objet = Objet::find($id);
+        if (!$objet) {
+            return response()->json(['error' => 'Objet non trouvé'], 404);
+        }
+
+        // Vérifie si le prix est supérieur au prix actuel
+        if ($request->prix <= $objet->prixActuel) {
+            return response()->json(['error' => 'Le prix doit être supérieur au prix actuel.'], 400);
+        }
+
+        // Insère l'enchère dans la table
+        $enchere = Enchere::create([
+            'prix' => $request->prix,
+            'date' => now(), // Date actuelle
+            'prop_id' => $request->prop_id,
+            'objet_id' => $id,
+        ]);
+
+        // Met à jour le prix actuel de l'objet
+        $objet->update(['prixActuel' => $request->prix]);
+
+        return response()->json([
+            'message' => 'Enchère placée avec succès.',
+            'enchere' => $enchere,
+        ]);
     }
 
     /**

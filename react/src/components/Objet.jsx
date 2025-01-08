@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { Link } from 'react-router-dom';
+
 
 export default function Objet({ objet }) {
     const [timeLeft, setTimeLeft] = useState("")
@@ -30,8 +32,10 @@ export default function Objet({ objet }) {
     return (
 
         <>
-            <div class="bg-white shadow-sm relative overflow-hidden w-[300px] ">
+            <div class="bg-white shadow-sm relative overflow-hidden w-[300px] mx-auto ">
                 <img src={objet.image} alt="Item Image" class="w-full h-64 object-cover" />
+                <span className="absolute top-2 left-0 bg-red-600 text-white px-3 py-1 rounded-r-md text-sm">Live</span>
+
                 <div className="bg-white text-center absolute py-4 px-7 rounded-md top-[230px] left-[45px] mx-auto font-semibold shadow-md">
                     {timeLeft}
                 </div>
@@ -42,7 +46,9 @@ export default function Objet({ objet }) {
                         <span className=" text-gray-500 mr-2">Current Bidding:</span><span class="font-semibold text-xl">{objet.prixActuel}$</span>
                     </div>
                     <div className=" flex ">
+                    <Link to={`/details/${objet.id}`} >
                         <button class="bg-white text-black py-2 px-4 mt-5   border border-black rounded hover:bg-black hover:text-white ">Start a Bid</button>
+                    </Link>
                     </div>
                 </div>
             </div>
