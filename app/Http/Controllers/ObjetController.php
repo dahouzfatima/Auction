@@ -34,6 +34,17 @@ class ObjetController extends Controller
 
     return response()->json($sales);
 }
+public function getUserEncheres($userId)
+{
+    $user = User::find($userId);  // Utilisation de find() pour récupérer l'utilisateur par son ID
+
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+    $encheres = $user->encheres()->with(['objet', 'prop'])->paginate(6);
+
+    return response()->json($encheres);
+}
 
     /**
      * Show the form for creating a new resource.

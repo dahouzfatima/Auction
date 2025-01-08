@@ -28,5 +28,6 @@ Route::post('signup',[AuthController::class,'signup']);
 Route::post('login',[AuthController::class,'login'])->name('login');
 // Dans routes/api.php
 Route::get('/sales/{userId}', [ObjetController::class, 'getUserSales']);
+Route::get('/encheres/{userId}', [ObjetController::class, 'getUserEncheres']);
 
 

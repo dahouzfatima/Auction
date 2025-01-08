@@ -40,7 +40,7 @@ export default function MyItems() {
                             <th className="border border-gray-300 px-4 py-2">Title</th>
                             <th className="border border-gray-300 px-4 py-2">Current Price</th>
                             <th className="border border-gray-300 px-4 py-2">Status</th>
-                            <th className="border border-gray-300 px-4 py-2">Certificate</th>
+                            <th className="border border-gray-300 px-4 py-2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,7 +70,7 @@ export default function MyItems() {
                         <div className="flex flex-col space-y-2">
                             <img src={sale.image} alt={sale.title} className="w-20 h-20 object-cover mx-auto" />
                             <div>
-                                <strong>Artwork Title:</strong> {sale.titre}
+                                <strong> Title:</strong> {sale.titre}
                             </div>
                             <div>
                                 <strong>Price:</strong> ${sale.prixActuel}
