@@ -1,17 +1,19 @@
 import axios from 'axios'
 import router from './router'
-const axiosClient=axios.create({
-    baseURL:`${import.meta.env.VITE_API_BASE_URL}/api`
+const axiosClient = axios.create({
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
 })
-axiosClient.interceptors.request.use((config)=>{
-    const token=localStorage.getItem('token');
-    config.headers.Authorization=`Bearer ${token}`;
+axiosClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    // Assurez-vous que axiosClient est configuré correctement
+    axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
     return config;
 })
-axiosClient.interceptors.response.use((response)=>{
+axiosClient.interceptors.response.use((response) => {
     return response;
-},error=>{
-    if(error.response && error.response.status==401){
+}, error => {
+    if (error.response && error.response.status == 401) {
         router.navigate('/login');
         return error;
     }

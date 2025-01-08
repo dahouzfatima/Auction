@@ -58,6 +58,7 @@ export default function Authentification() {
         }).then(({ data }) => {
             console.log(data);
             setCurrentUser(data.user);
+            console.log(data.user);
             setUserToken(data.token);
             navigate('/preview');
 

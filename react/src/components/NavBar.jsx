@@ -1,9 +1,39 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { links } from "./MyLinks";
+import { userStateContext } from "../contexts/ContextProvider";
+import axiosClient from "../axios";
 
 export default function Header({ SearchTerm, handleSearch }) {
     const [hoverMenu, setHoverMenu] = useState("");
+    const { userToken, setCurrentUser, currentUser, setUserToken } = userStateContext();
+
+    if (!userToken) {
+        return <Navigate to="/login" />;
+    }
+
+    useEffect(() => {
+        console.log("Authorization Header:", {
+            'Authorization': `Bearer ${userToken}`,
+        });
+
+        // Envoi de la requête à l'API avec le token
+        axiosClient.get('/me', {
+            headers: {
+                'Authorization': `Bearer ${userToken}`,
+            }
+        })
+            .then(({ data }) => {
+                console.log("data:", data);
+                setCurrentUser(data);
+            })
+            .catch((error) => {
+                console.error("Request error:", error);
+            });
+    }, [userToken]);
+
+
+    // Ajoutez userToken dans les dépendances pour que l'effet se déclenche quand il change
 
     return (
         <header className="bg-white shadow-md">
@@ -36,7 +66,7 @@ export default function Header({ SearchTerm, handleSearch }) {
                             to="/preview/dashboard"
                             className="bg-black text-white py-2 px-4 rounded-full hover:bg-white hover:text-black border border-black"
                         >
-                            My Account
+                            {currentUser.firstName}
                         </Link>
                     </div>
                 </div>
@@ -48,7 +78,7 @@ export default function Header({ SearchTerm, handleSearch }) {
                     <ul className="flex space-x-8">
                         {/* Home */}
                         <li className="relative group">
-                            <Link to="/" className="py-4 block hover:text-primary">
+                            <Link to="/preview" className="py-4 block hover:text-primary">
                                 Home
                             </Link>
                         </li>

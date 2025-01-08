@@ -6,6 +6,7 @@ import router from './router.jsx'
 import { RouterProvider } from 'react-router-dom'
 import Objet from './components/Objet.jsx'
 import { ContextProvider } from './contexts/ContextProvider.jsx'
+import 'boxicons/css/boxicons.min.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

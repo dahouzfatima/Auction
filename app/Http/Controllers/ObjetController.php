@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Objet;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ObjetController extends Controller
 {
@@ -22,6 +23,16 @@ class ObjetController extends Controller
         $objets = $query->paginate(8); // Récupérer tous les objets
         return response()->json($objets);
     }
+    public function getUserSales($userId)
+{
+    $user = User::find($userId);  // Utilisation de find() pour récupérer l'utilisateur par son ID
+
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+
+    return response()->json($user->ventes); 
+}
 
     /**
      * Show the form for creating a new resource.

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -14,6 +16,20 @@ class UserController extends Controller
     public function index()
     {
         //
+    }
+    public function dashboard(Request $request){
+        $user = $request->user();
+        $actual_user=User::where('id',$user->id)->get();
+        if (!$actual_user) {
+            return response()->json(['error' => 'Utilisateur non authentifié'], 401);
+        }
+    
+        // Récupérer les ventes de l'utilisateur
+        return response()->json([
+            'user' => $user,
+            'ventes' => $user->ventes, // La relation "ventes" doit être définie dans le modèle User
+        ]);
+
     }
 
     /**

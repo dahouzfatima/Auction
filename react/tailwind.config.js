@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'], // Par défaut pour le texte
+        sans: [ 'sans-serif','Roboto', 'Arial', 'Inter',], // Par défaut pour le texte
         serif: ['Playfair Display', 'serif'], // Pour les titres
       },
     },
