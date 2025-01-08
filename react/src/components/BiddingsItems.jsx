@@ -1,23 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function BiddingItems() {
-    const [user, setUser] = useState(null);
-    const [ventes, setVentes] = useState([]);
-    useEffect(() => {
-        fetch(`http://127.0.0.1:8000/dashboard`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`, // Si vous utilisez Sanctum
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setUser(data.user);
-                setVentes(data.ventes);
-            })
-            .catch((error) => console.log("Erreur lors de la récupération des donnnees: ", error));
-    }, [])
+    const {}
     return (
         <>
             <div>

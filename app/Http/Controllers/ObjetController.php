@@ -30,8 +30,9 @@ class ObjetController extends Controller
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
     }
+    $sales = $user->ventes()->paginate(6);
 
-    return response()->json($user->ventes); 
+    return response()->json($sales);
 }
 
     /**

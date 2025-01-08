@@ -4,10 +4,10 @@ import { RiAuctionLine } from "react-icons/ri";
 import { userStateContext } from "../contexts/ContextProvider.jsx";
 import { useNavigate } from "react-router-dom";
 function Sidebar({ setActiveComponent }) {
-    const { currentUser,userToken,setCurrentUser,setUserToken } = userStateContext();
-    const navigate=useNavigate();
-    const logout=(ev)=>{
-        axiosClient.post('logout').then(res=>{
+    const { currentUser, userToken, setCurrentUser, setUserToken } = userStateContext();
+    const navigate = useNavigate();
+    const logout = (ev) => {
+        axiosClient.post('logout').then(res => {
             setCurrentUser({});
             setUserToken(null);
         })
@@ -28,6 +28,14 @@ function Sidebar({ setActiveComponent }) {
                         <i class='bx bx-user text-2xl sm:text-4xl group-hover:text-white sm:mr-3'></i>
                     </div>
                     <p className="group-hover:text-white  hidden sm:inline-block min-w-[650px]:hidden text-xl  font-roboto  leading-relaxed" >Profile</p>
+                </div>
+                <div className="inline-flex items-center group hover:bg-black border border-gray-200 px-3 py-1 cursor-pointer w-fit sm:w-auto" onClick={() => setActiveComponent("Items")}>
+                    <i className="bx bx-trending-down text-2xl sm:text-4xl group-hover:text-white sm:mr-3"></i>
+                    <p
+                        className="group-hover:text-white hidden sm:inline-block  text-xl font-roboto leading-relaxed"
+                    >
+                        Posted Items
+                    </p>
                 </div>
                 <div onClick={() => setActiveComponent("BiddingItems")} className=" cursor-pointer grid grid-cols-1 md:grid-cols-[auto,1fr] group  w-fit sm:w-auto  hover:bg-black  border border-gray-200 px-3 py-1">
                     <div>

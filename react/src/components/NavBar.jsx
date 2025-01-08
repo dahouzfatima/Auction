@@ -66,7 +66,7 @@ export default function Header({ SearchTerm, handleSearch }) {
                             to="/preview/dashboard"
                             className="bg-black text-white py-2 px-4 rounded-full hover:bg-white hover:text-black border border-black"
                         >
-                            {currentUser.firstName}
+                            Account
                         </Link>
                     </div>
                 </div>
