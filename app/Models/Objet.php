@@ -19,6 +19,6 @@ class Objet extends Model
         return $this->belongsTo(User::class,'acheteur_id');
     }
     public function encheres(){
-        $this->hasMany(Enchere::class,'objet_id');
+        return $this->hasMany(Enchere::class,'objet_id');
     }
 }

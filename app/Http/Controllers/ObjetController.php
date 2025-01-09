@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Objet;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Enchere;
 use Illuminate\Support\Facades\Auth;
 
 class ObjetController extends Controller
@@ -39,15 +40,36 @@ class ObjetController extends Controller
 }
 public function getUserEncheres($userId)
 {
-    $user = User::find($userId);  // Utilisation de find() pour récupérer l'utilisateur par son ID
+    $user = User::find($userId);
 
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
     }
-    $encheres = $user->encheres()->with(['objet', 'prop'])->paginate(6);
+
+    // Récupérer les enchères de l'utilisateur avec l'objet associé
+    $encheres = $user->encheres()
+        ->with(['objet' => function ($query) {
+            $query->with(['encheres']);
+        }])
+        ->get(); // Récupérer toutes les enchères de l'utilisateur
+
+    // Grouper les enchères par objet_id et récupérer la dernière enchère pour chaque objet
+    $encheresGrouped = $encheres->groupBy('objet_id')->map(function ($group) {
+        // Trier les enchères par date décroissante et récupérer la première (la plus récente)
+        return $group->sortByDesc('created_at')->first();
+    });
+
+    // Réorganiser les enchères en une collection pour la pagination
+    $encheres = new \Illuminate\Pagination\LengthAwarePaginator(
+        $encheresGrouped->values(),
+        $encheresGrouped->count(),
+        6,
+        request()->input('page', 1)
+    );
 
     return response()->json($encheres);
 }
+
 
     /**
      * Show the form for creating a new resource.

@@ -49,8 +49,8 @@ export default function MyItems() {
                                 <td className="border border-gray-300 px-4 py-2">
                                     <img src={sale.image} alt={sale.title} className="w-10 h-10 object-cover text-center" />
                                 </td>
-                                <td className="border border-gray-300 px-4 py-2">{sale.titre}</td>
-                                <td className="border border-gray-300 px-4 py-2">${sale.prixActuel}</td>
+                                <td className="border border-gray-300 px-4 py-2 ">{sale.titre}</td>
+                                <td className="border border-gray-300 px-4 py-2 font-bold text-red-800">${sale.prixActuel}</td>
                                 <td className={`border border-gray-300 px-4 py-2 ${sale.etat === 'termine' ? 'text-green-600' : 'text-red-600'}`}>
                                     {sale.etat}
                                 </td>
@@ -73,7 +73,7 @@ export default function MyItems() {
                                 <strong> Title:</strong> {sale.titre}
                             </div>
                             <div>
-                                <strong>Price:</strong> ${sale.prixActuel}
+                                <strong>Price:</strong> <span className="text-red-800 font-bold">${sale.prixActuel} </span>
                             </div>
                             <div>
                                 <strong>Status:</strong>

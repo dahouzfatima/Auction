@@ -49,8 +49,8 @@ export default function BiddingItems() {
                                     <img src={sale.objet.image} alt={sale.objet.titre} className="w-10 h-10 object-cover text-center" />
                                 </td>
                                 <td className="border border-gray-300 px-4 py-2">{sale.objet.titre}</td>
-                                <td className="border border-gray-300 px-4 py-2">${sale.prix}</td>
-                                <td className="border border-gray-300 px-4 py-2">${sale.objet.prixActuel}</td>
+                                <td className="border border-gray-300 px-4 py-2 font-semibold text-red-800">${sale.prix}</td>
+                                <td className="border border-gray-300 px-4 py-2 font-semibold text-red-800">${sale.objet.prixActuel}</td>
                                 <td className="border border-gray-300 px-4 py-2">
                                     <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
                                         Preview
@@ -69,11 +69,11 @@ export default function BiddingItems() {
                             <div>
                                 <strong>Title:</strong> {sale.titre}
                             </div>
-                            <div>
-                                <strong>Bid Price:</strong> ${sale.prix}
+                            <div className="font-semibold ">
+                                <strong>Bid Price:</strong> <span className="text-red-800">${sale.prix}</span>
                             </div>
-                            <div>
-                                <strong>Actual Price:</strong> ${sale.objet.prixActuel}
+                            <div className="font-semibold  ">
+                                <strong className="">Actual Price:</strong><span className="text-red-800"> ${sale.objet.prixActuel}</span>
                             </div>
                             <div>
                                 <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
