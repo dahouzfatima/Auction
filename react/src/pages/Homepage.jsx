@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Banner from '../components/BannerL';
 import About from '../components/About';
@@ -10,18 +9,18 @@ import Footer from '../components/FooterL';
 
 
 function Homepage() {
-  return (
-    <div className="App">
-      <Banner/>
-      <About></About>
-      <AuctionLatest/>
-      <WhyUs/>
-      <Acknowledges/>
-      <Footer/>
-    
-    
-    </div>
-  );
+    return (
+        <div >
+            <Banner />
+            <About></About>
+            <AuctionLatest />
+            <WhyUs />
+            <Acknowledges />
+            <Footer />
+
+
+        </div>
+    );
 }
 
 export default Homepage;
