@@ -14,7 +14,7 @@ export default function Preview() {
     // Fetch objects from the server
     const fetchObjets = () => {
         // Inclure le terme de recherche et la page dans la requête
-        fetch(`http://127.0.0.1:8000/objets?page=${page}&search=${searchTerm}`)
+        fetch(`http://127.0.0.1:8000/objets?page=${page}&search=${searchTerm}&id=${currentUser.id}`)
             .then((response) => response.json())
             .then((data) => {
                 setObjets(data.data);

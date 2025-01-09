@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(
         Route::post('/objets/{id}/bid', [EnchereController::class, 'store']); 
     }
 );
+Route::resource('/objets', ObjetController::class);
 
 Route::post('signup',[AuthController::class,'signup']);
 Route::post('login',[AuthController::class,'login'])->name('login');

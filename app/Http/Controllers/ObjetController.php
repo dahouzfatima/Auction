@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Objet;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ObjetController extends Controller
 {
@@ -15,17 +16,19 @@ class ObjetController extends Controller
      */
     public function index(Request $request)
     {
-        $query=Objet::query();
-        if($request->has('search')){
-            $search=$request->input('search');
-            $query->where('titre','like','%'.$search.'%');
+        $query = Objet::query();
+       if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('titre', 'like', '%' . $search . '%');
         }
-        $objets = $query->paginate(8); // Récupérer tous les objets
-        return response()->json($objets);
+        $currentUserId = $request->input('id'); 
+        $query->where('vendeur_id', '!=', $currentUserId);
+        $objets = $query->paginate(8);
+       return response()->json($objets);
     }
     public function getUserSales($userId)
 {
-    $user = User::find($userId);  // Utilisation de find() pour récupérer l'utilisateur par son ID
+    $user = User::find($userId); 
 
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
