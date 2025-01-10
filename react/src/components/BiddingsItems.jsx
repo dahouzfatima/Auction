@@ -39,6 +39,7 @@ export default function BiddingItems() {
                             <th className="border border-gray-300 px-4 py-2">Title</th>
                             <th className="border border-gray-300 px-4 py-2">Bid Price</th>
                             <th className="border border-gray-300 px-4 py-2">Current Price</th>
+                            <th className="border border-gray-300 px-4 py-2">Status</th>
                             <th className="border border-gray-300 px-4 py-2">Action</th>
                         </tr>
                     </thead>
@@ -51,6 +52,9 @@ export default function BiddingItems() {
                                 <td className="border border-gray-300 px-4 py-2">{sale.objet.titre}</td>
                                 <td className="border border-gray-300 px-4 py-2 font-semibold text-red-800">${sale.prix}</td>
                                 <td className="border border-gray-300 px-4 py-2 font-semibold text-red-800">${sale.objet.prixActuel}</td>
+                                <td className={`border border-gray-300 px-4 py-2  font-semibold ${sale.objet.etat === 'en_cours' ? '' : sale.objet.etat === 'termine' && sale.prix >= sale.objet.prixActuel ? 'text-green-600' : 'text-red-600'}`}>
+                                    {sale.objet.etat === 'en_cours' ? sale.objet.etat : sale.objet.etat === 'termine' && sale.prix >= sale.objet.prixActuel ? 'Win' : 'Cancel'}
+                                </td>
                                 <td className="border border-gray-300 px-4 py-2">
                                     <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
                                         Preview
@@ -74,6 +78,12 @@ export default function BiddingItems() {
                             </div>
                             <div className="font-semibold  ">
                                 <strong className="">Actual Price:</strong><span className="text-red-800"> ${sale.objet.prixActuel}</span>
+                            </div>
+                            <div className="font-semibold  ">
+                                <strong className="">Status:</strong>
+                                <span className={`font-semibold ${sale.objet.etat === 'en_cours' ? '' : sale.objet.etat === 'termine' && sale.prix > sale.objet.prixActuel ? 'text-green-600' : 'text-red-600'}`}>
+                                    {sale.objet.etat === 'en_cours' ? sale.objet.etat : sale.objet.etat === 'termine' && sale.prix > sale.objet.prixActuel ? 'Win' : 'Cancel'}
+                                </span>
                             </div>
                             <div>
                                 <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">

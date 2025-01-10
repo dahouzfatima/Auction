@@ -27,6 +27,9 @@ class User extends Authenticatable
     public function encheres(){
         return $this->hasMany(Enchere::class,'prop_id');
     }
+    public function wishlist(){
+    return $this->belongsToMany(Objet::class, 'wishlists', 'prop_id', 'objet_id')
+                ->withTimestamps();}
     
 
 

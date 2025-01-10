@@ -24,7 +24,7 @@ class ObjetController extends Controller
         }
         $currentUserId = $request->input('id'); 
         $query->where('vendeur_id', '!=', $currentUserId);
-        $objets = $query->paginate(8);
+        $objets = $query->where('etat', '!=', 'termine')->paginate(8);
        return response()->json($objets);
     }
     public function getUserSales($userId)
@@ -38,6 +38,30 @@ class ObjetController extends Controller
 
     return response()->json($sales);
 }
+public function store(Request $request)
+    {
+         // Validation des données
+         $validated = $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|url', 
+            'address' => 'required|string',
+            'prixInitial' => 'required',
+            'prixActuel'=> 'required',
+            'dateDepart' => 'required|date',
+            'dateFin' => 'required|date|after:dateDepart',
+            'etat' => 'required|in:en_attente,en_cours,termine',
+            'vendeur_id' => 'required|exists:users,id',
+        ]);
+        //dd($validated);
+        // Création de l'objet dans la base de données
+        $objet = Objet::create($validated);
+
+        return response()->json([
+            'message' => 'Objet créé avec succès.',
+            'objet' => $objet
+        ], 201); // Code HTTP 201 pour la création réussie
+    }
 public function getUserEncheres($userId)
 {
     $user = User::find($userId);
@@ -71,6 +95,7 @@ public function getUserEncheres($userId)
 }
 
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -80,6 +105,9 @@ public function getUserEncheres($userId)
     {
         //
     }
+    public function wishlistedBy(){
+    return $this->belongsToMany(User::class, 'wishlist', 'objet_id', 'user_id')
+                ->withTimestamps();}
     public function latestObjects(Request $request)
     {
         $objets = Objet::orderBy('dateDepart', 'desc')->take(10)->get();
@@ -92,10 +120,6 @@ public function getUserEncheres($userId)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.

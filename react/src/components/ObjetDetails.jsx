@@ -4,18 +4,24 @@ import { userStateContext } from '../contexts/ContextProvider';
 import axiosClient from "../axios";
 
 const ObjetDetails = () => {
+   
+
     const { userToken, currentUser } = userStateContext();
     const { id } = useParams(); // Récupère l'ID de l'objet depuis l'URL
     const [objet, setObjet] = useState(null); // Stocke les données de l'objet
     const [bid, setBid] = useState(0); // Stocke la valeur actuelle de l'enchère entrée par l'utilisateur
+
     const [timeLeft, setTimeLeft] = useState("");
+    const [timeLeftStart, setTimeLeftStart] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); // Message d'erreur
+    const [etat,setEtat]= useState("");
+
 
     // Fonction pour récupérer les détails de l'objet depuis le backend
     const fetchObjetDetails = async () => {
-        axiosClient.get(`/objets/${id}`, {
+        axiosClient.get(/objets/${id}, {
             headers: {
-                Authorization: `Bearer ${userToken}`,
+                Authorization:`Bearer ${userToken}`,
             },
         })
             .then(({ data }) => {
@@ -25,19 +31,45 @@ const ObjetDetails = () => {
                 console.error("Erreur lors de la récupération des ventes:", error);
             });
     };
+  
 
     // Appeler fetchObjetDetails lors du montage du composant
     useEffect(() => {
+        
         fetchObjetDetails();
+        
+        
+
     }, [id]);
+    useEffect(() =>{
+        if(objet ){
+            setBid(objet.prixActuel);
+            setEtat(objet.etat);
+        }   
+    },[objet])
+
     useEffect(() => {
         // Fonction pour calculer le temps restant
         if (objet && objet.dateFin) {
+            setEtat(objet.etat);
+            console.log(objet.etat);
             const calculateTimeLeft = () => {
                 const now = new Date(); // Date actuelle
                 const endDate = new Date(objet.dateFin); // Date de fin
+                const startDate =  new Date(objet.dateDepart);
+                console.log(startDate);
                 const diff = endDate - now; // Différence en millisecondes
-
+                console.log(diff)
+                const diffUpcoming = startDate - now;
+                console.log(diffUpcoming);
+                if (diffUpcoming > 0) {
+                    const days = Math.floor(diffUpcoming / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diffUpcoming / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((diffUpcoming/ 1000 / 60) % 60);
+                    const seconds = Math.floor((diffUpcoming / 1000) % 60);
+                    console.log("herrrreeeeee");
+                    setTimeLeftStart(`${days}D : ${hours}H : ${minutes}M : ${seconds}Sec`);
+                } 
                 if (diff > 0) {
                     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -56,7 +88,7 @@ const ObjetDetails = () => {
             // Nettoyer l'intervalle lorsqu'on quitte le composant
             return () => clearInterval(timer);
         }
-    }, objet)
+    }, [objet])
 
     // Fonction pour placer une enchère
     const placeBid = async () => {
@@ -64,7 +96,7 @@ const ObjetDetails = () => {
 
         try {
             const response = await axiosClient.post(
-                `/objets/${id}/bid`, // Endpoint relatif
+                /objets/${id}/bid, // Endpoint relatif
                 {
                     prix: bid,
                     prop_id: currentUser.id, // Utilisez l'ID de l'utilisateur actuel
@@ -73,7 +105,7 @@ const ObjetDetails = () => {
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${userToken}`, // Token utilisateur
+                        Authorization:` Bearer ${userToken}`, // Token utilisateur
                     },
                 }
             );
@@ -94,9 +126,10 @@ const ObjetDetails = () => {
             setErrorMessage("Le prix saisi ne peut pas être inférieur au prix actuel.");
         } else {
             setErrorMessage(""); // Réinitialisez le message d'erreur
+            setBid(newBid);
+
         }
 
-        setBid(newBid);
     };
 
     // Vérification si l'objet est chargé
@@ -118,7 +151,7 @@ const ObjetDetails = () => {
 
         return formattedDate.replace(',', ' at'); // Ajoute "at" au format
     };
-
+    
     return (
         <div className="p-8 text-black bg-white min-h-screen">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -127,14 +160,14 @@ const ObjetDetails = () => {
                     <img
                         src={objet.image}
                         alt={objet.titre}
-                        className="w-full max-w-md rounded-lg shadow-md"
+                        className="w-full h-[550px] max-w-md rounded-lg shadow-md"
                     />
                     <div className="flex space-x-4 mt-4">
                         {objet.images && objet.images.map((img, index) => (
                             <img
                                 key={index}
                                 src={img}
-                                alt={`Image ${index + 1}`}
+                                alt={Image ${index + 1}}
                                 className="w-16 h-16 object-cover rounded-md border border-gray-500"
                             />
                         ))}
@@ -166,7 +199,11 @@ const ObjetDetails = () => {
                     {/* Placer une enchère */}
                     <div className="mt-6">
                         <div className="flex items-center mt-4">
-                            <button className='w-10 h-10 bg-black text-white rounded  mr-2'
+                            <button className={`w-10 h-10  hover:bg-black bg-black hover:text-white text-white rounded  mr-2 ${ etat === "en_attente"
+                                     ? " cursor-not-allowed "
+                                     : " "
+                                    }`} 
+                                    disabled={etat === "en_attente"}
                                 onClick={() => setBid((prevBid) => (prevBid > objet.prixActuel + 1 ? prevBid - 1 : prevBid))}
                             >-</button>
                             <input
@@ -174,13 +211,19 @@ const ObjetDetails = () => {
                                 value={bid}
                                 onChange={handleBidChange}
                                 className="border border-gray-600 p-2 rounded-md w-24  text-black"
+                                disabled={etat === "en_attente"}
                             />
-                            <button className='w-10 h-10 bg-black text-white rounded mr-2 ml-2'
+                            <button className={`w-10 h-10 hover:bg-black bg-black text-white rounded  mr-2 ml-2 ${ etat === "en_attente"
+                                     ? " cursor-not-allowed "
+                                     : "  "
+                                    }`} 
+                                    disabled={etat === "en_attente"}
                                 onClick={() => setBid((prevBid) => prevBid + 1)}>+</button>
+                            
                             <button
                                 onClick={placeBid}
-                                disabled={!!errorMessage} // Désactivez le bouton en cas d'erreur
-                                className={` transition-all  duration-400 underline border  border-1 border-black px-4 py-2 rounded-md ${errorMessage
+                                disabled={!!errorMessage || etat === "en_attente"} // Désactivez le bouton en cas d'erreur
+                                className={` transition-all  duration-400 underline border  border-1 border-black px-4 py-2 rounded-md ${errorMessage || etat === "en_attente"
                                     ? "bg-gray-400 text-black cursor-not-allowed "
                                     : " hover:bg-black hover:text-white"
                                     }`}
@@ -197,12 +240,13 @@ const ObjetDetails = () => {
                     <div className='mt-4 '>
                         <div className='flex flex-row  items-center align-center'>
                             <button className='w-8 mr-4 '><span class="material-symbols-outlined text-[20px] font-extralight rounded-full border-1 flex justify-center items-center w-8 h-8 mr-4 hover:bg-black hover:text-white transition-all duration-400 cursor-pointer">favorite</span></button>
-                            <div className='text-[#515050] '>Ajouter au favorite</div>
+                            <div className='text-[#515050] '>Ajouter au favorie</div>
                         </div>
                     </div>
+                    {etat === "en_cours" &&(
                     <div>
                         <div className='mt-3 text-[#515050]'>
-                            L'enchère sera terminée dans
+                            L'enchère sera  <strong>terminée</strong> dans
                         </div>
                         <div className="bg-white text-center  py-4 px-7 rounded-md  mx-auto  text-2xl  shadow-md">
                             {timeLeft}
@@ -211,6 +255,19 @@ const ObjetDetails = () => {
                             <span>Ending: </span> {formatDateWithAt(objet.dateFin)}
                         </div>
                     </div>
+                    )}
+                    {etat === "en_attente" && (
+                        <div>
+                            <div className='mt-3 text-[#515050]'>
+                                L'enchère <strong>commencera</strong> dans
+                            </div>
+                            <div className="bg-white text-center  py-4 px-7 rounded-md  mx-auto  text-2xl  shadow-md">
+                                {timeLeftStart}
+                            </div>
+                           
+                        </div>
+                    )}
+                    
                 </div>
             </div>
             <div>

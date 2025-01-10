@@ -63,6 +63,14 @@ export default function Header({ SearchTerm, handleSearch }) {
                     </div>
                     <div>
                         <Link
+                            to="/addObjet"
+                            className="bg-black text-white py-2  hover:underline px-4 rounded-full hover:bg-white hover:text-black border border-black"
+                        >
+                            Add An Item 
+                        </Link>
+                    </div>
+                    <div>
+                        <Link
                             to="/preview/dashboard"
                             className="bg-black text-white py-2 px-4 rounded-full hover:bg-white hover:text-black border border-black"
                         >

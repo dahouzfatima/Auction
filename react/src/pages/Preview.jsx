@@ -5,6 +5,7 @@ import Banner from "../components/Banner";
 import { Footer } from "../components/Footer";
 import { userStateContext } from "../contexts/ContextProvider";
 
+
 export default function Preview() {
     const {currentUser}=userStateContext();
     const [objets, setObjets] = useState([]);

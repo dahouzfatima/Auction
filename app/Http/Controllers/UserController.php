@@ -27,7 +27,28 @@ class UserController extends Controller
         // Récupérer les ventes de l'utilisateur
         return response()->json([
             'user' => $user,
-            'ventes' => $user->ventes, // La relation "ventes" doit être définie dans le modèle User
+            'ventes' => $user->ventes, 
+        ]);
+
+    }
+    public function dashboardUser(Request $request){
+        $user = $request->user();
+        $postedItems= $user->ventes()->exists() ? $user->ventes()->count() : 0;
+        $winnedItems=$user->achats()->exists()?$user->achats()->count():0;
+        $participatedItems=$user->encheres()->select('objet_id')->distinct()->count('objet_id');
+        $losedItems=$user->encheres()
+        ->select('objet_id') 
+        ->distinct()         
+        ->whereHas('objet', function ($query) use ($user) {
+            $query->whereNotNull('acheteur_id') 
+                  ->where('acheteur_id', '!=', $user->id); 
+        })
+        ->count();
+        return response()->json([
+            'postedItems' => $postedItems,
+            'winnedBids' => $winnedItems, 
+            'participatedItems'=>$participatedItems,
+            'losedBids'=>$losedItems
         ]);
 
     }

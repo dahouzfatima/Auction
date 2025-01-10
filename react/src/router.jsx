@@ -6,6 +6,7 @@ import Authentification from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import PlaceBid from "./pages/PlaceBid";
 import Homepage from "./pages/Homepage";
+import FormObjet from "./pages/FormObjet";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     {
         path: '/details/:id',
         element: <PlaceBid />
+    }
+    ,{
+        path:'/addObjet',
+        element:<FormObjet></FormObjet>
     }
 
 ])

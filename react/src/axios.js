@@ -5,7 +5,6 @@ const axiosClient = axios.create({
 })
 axiosClient.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
-    // Assurez-vous que axiosClient est configuré correctement
     axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     return config;

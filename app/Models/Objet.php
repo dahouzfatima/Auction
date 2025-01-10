@@ -10,7 +10,7 @@ class Objet extends Model
     use HasFactory;
     protected $table = 'objets';
     protected $fillable = [
-        'titre', 'description', 'image', 'address', 'prixInitial', 'prixActuel', 'dateDepart', 'dateFin', 'etat', 'vendeur_id', 'acheteur_id'
+        'titre', 'description', 'image', 'address', 'prixInitial', 'prixActuel', 'dateDepart', 'dateFin', 'etat', 'vendeur_id'
     ];
     public function vendeur(){
         return $this->belongsTo(User::class,'vendeur_id');
