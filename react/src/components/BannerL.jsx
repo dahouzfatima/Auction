@@ -1,14 +1,13 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-
 import "./Banner.css"
 import Navbar from "./NavbarL";
 
-const BannerL = () => {
+const BannerL = ({ scrollToSection }) => {
   return (
       
       <section className="slider ">
-        <Navbar/>
+        <Navbar  scrollToSection={scrollToSection} />
         <Carousel variant="dark ">
           <Carousel.Item>
             <img src={'landingArt.jpg'} className="d-block w-100 h-[100vh]" alt="First slide" />

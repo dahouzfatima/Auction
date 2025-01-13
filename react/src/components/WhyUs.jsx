@@ -2,8 +2,8 @@ import React from 'react';
 
 const WhyUs = () => {
   return (
-    <div className=" relative  text-white py-3 mt-5 ">
-      <div className=" w-full bg-black text-white mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center ">
+    <div className=" relative  text-white  mt-6 ">
+      <div className=" w-full pt-2  bg-black text-white mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center ">
         {/* Left Section */}
         <div className="lg:w-2/3 text-justify">
           <h2 className="text-4xl font-bold mb-4">What Makes Us Special</h2>
@@ -18,7 +18,7 @@ const WhyUs = () => {
                 <img
                   src="https://img.icons8.com/ios-filled/50/ffffff/handshake.png"
                   alt="Support Artists"
-                  className="h-8 w-8"
+                  className="h-8 w-8 "
                 />
               </div>
               <div className="ml-4">
@@ -40,8 +40,7 @@ const WhyUs = () => {
               <div className="ml-4 ">
                 <h3 className="text-lg font-semibold">Secure Transactions</h3>
                 <p className="text-gray-400">
-                  We connect artists and collectors from around the world.
-                </p>
+                   Empowering Confidence with Every Secure Transaction                </p>
               </div>
             </div>
 
@@ -72,7 +71,7 @@ const WhyUs = () => {
               <div className="ml-4 ">
                 <h3 className="text-lg font-semibold">Seamless Experience</h3>
                 <p className="text-gray-400">
-                  We connect artists and collectors from around the world.
+                We connect collectors with arts from around the world.
                 </p>
               </div>
             </div>
@@ -80,11 +79,11 @@ const WhyUs = () => {
         </div>
 
         {/* Right Section */}
-        <div className="  lg:w-1/3 mt-8 lg:mt-0">
+        <div className="  lg:w-1/3 mt-8 lg:-mt-5">
           <img
             src="frida_whyUs.jpg" 
             alt="Artwork"
-            className="rounded-lg shadow-lg h-[100vh]"
+            className=" shadow-lg h-[100vh]"
           />
         </div>
       </div>

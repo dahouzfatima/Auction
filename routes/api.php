@@ -40,6 +40,8 @@ Route::post('login',[AuthController::class,'login'])->name('login');
 
 Route::get('/sales/{userId}', [ObjetController::class, 'getUserSales']);
 Route::get('/encheres/{userId}', [ObjetController::class, 'getUserEncheres']);
+Route::get('/objets/{id}', [ObjetController::class, 'show']);
+
 
 
 

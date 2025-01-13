@@ -5,8 +5,15 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Console\Commands\CheckExpiredObjects;
+use App\Console\Commands\UpdateObjectState;
+
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        \App\Console\Commands\CheckExpiredObjects::class,
+        \App\Console\Commands\UpdateObjectState::class,
+    ];
     /**
      * Define the application's command schedule.
      *
@@ -16,6 +23,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('objects:check-expired')->everyMinute(); // Exécution chaque heure
+        $schedule->command('command:update-object-state')->everyMinute();
     }
 
     /**

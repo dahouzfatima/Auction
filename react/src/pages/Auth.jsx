@@ -78,7 +78,7 @@ export default function Authentification() {
     }
     return (
         <div className="authbody w-screen" >
-            <div className={`container overflow-hidden m-[20px] container1 relative w-[850px] h-[600px] bg-[#fff] ${register ? 'active' : ''}`}>
+            <div className={` overflow-hidden m-[20px] container1 relative w-[850px] h-[600px] bg-[#fff] ${register ? 'active' : ''}`}>
                 <div className=" form-box login absolute w-[50%]   right-0 flex items-center text-center px-[40px]">
                     <form action="#" onSubmit={onLoginSubmit} className="w-full " method="POST">
                         <h1 className="text-[36px] font-extrabold">Login</h1>
@@ -98,7 +98,7 @@ export default function Authentification() {
                         <button type="submit" className="w-full  font-bold  bg-[#5a3920] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md">
                             Login
                         </button>
-                        <h1 className="text-[#333] mt-[5px] underline">Forget Password ?</h1>
+                        <h4 className="text-[#333] mt-[15px] underline">Forget Password ?</h4>
                     </form>
                 </div>
                 <div className=" toggle-box  absolute w-full h-full flex ">

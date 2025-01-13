@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import PlaceBid from "./pages/PlaceBid";
 import Homepage from "./pages/Homepage";
 import FormObjet from "./pages/FormObjet";
+import About from "./components/About";
 
 const router = createBrowserRouter([
     {

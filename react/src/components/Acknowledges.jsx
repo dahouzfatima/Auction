@@ -89,21 +89,24 @@ const Acknowledges = () => {
                   <h3 className="text-lg font-semibold mb-2">{testimonial.title}</h3>
                   <p className="text-gray-500 italic mb-6">"{testimonial.quote}"</p>
                 </div>
-                <div className="flex items-center mt-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.author}
-                    className="w-12 h-12 rounded-full object-cover object-top   mr-4"
-                  />
-                  <div>
-                    <p className="font-semibold">{testimonial.author}</p>
-                    <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                <div className="flex items-center justify-between  mt-4">
+                  <div className="flex flex-row">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.author}
+                      className="w-12 h-12 rounded-full object-cover object-top   mr-4"
+                    />
+                    <div className=" flex flex-col -gap-5">
+                      <div className="font-semibold ">{testimonial.author}</div>
+                      <div className="text-gray-400 text-sm ">{testimonial.role}</div>
+                    </div>
                   </div>
-                </div>
-                <div className="text-gray-400 text-sm mt-4">
+                  <div className="text-gray-400 text-sm ">
                   {testimonial.date} <br />
                   {testimonial.time}
+                 </div>
                 </div>
+                
               </div>
             </SwiperSlide>
           ))}

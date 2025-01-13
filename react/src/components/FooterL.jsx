@@ -7,7 +7,7 @@ const FooterL = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
         {/* About Section */}
         <div>
-          <h2 className="text-2xl font-bold text-white">AuctionHere</h2>
+          <h2 className="text-2xl font-bold text-white">BidThic</h2>
           <p className="mt-4 text-justify">
             An Art Action Company typically operates in the space of live art,
             performance, and social practice, often combining elements of
@@ -16,7 +16,7 @@ const FooterL = () => {
           <div className="flex space-x-4 mt-4">
           <a
               href="#"
-              className="text-gray-400 hover:text-white transition no-underline"
+              className="text-gray-400  hover:text-white transition no-underline"
               aria-label="Facebook"
             >
               <FaFacebook size={20} />
@@ -49,12 +49,12 @@ const FooterL = () => {
         <div className="flex flex-col items-start text-justify">
           <ul className="space-y-2 text-justify">
             <li>
-                <h3 className="text-lg font-semibold text-white mb-4">Menu</h3>
+                <h2 className="text-lg font-semibold text-white mb-4">Menu</h2>
             </li>
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="text-white transition no-underline"
               >
                 Artists Portfolio
               </a>
@@ -62,7 +62,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="text-white transition no-underline"
               >
                 Art Catalog
               </a>
@@ -70,7 +70,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="text-white transition no-underline"
               >
                 Departments
               </a>
@@ -78,7 +78,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="text-white transition no-underline"
               >
                 Contact
               </a>
@@ -90,12 +90,12 @@ const FooterL = () => {
         <div className="flex flex-col  text-justify ">
           <ul className="space-y-2 text-justify">
             <li>
-                <p className="text-lg font-semibold text-white mb-4 ">Resources</p>
+                <h2 className="text-lg font-semibold text-white mb-4 ">Resources</h2>
             </li>
             <li >
               <a
                 href="#"
-                className="hover:text-white transition no-underline "
+                className="hover:text-white text-white transition no-underline "
               >
                 Blog
               </a>
@@ -103,7 +103,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="  text-white transition no-underline"
               >
                 About Us
               </a>
@@ -111,7 +111,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className=" text-white transition no-underline"
               >
                 How to Bid
               </a>
@@ -119,7 +119,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="text-white transition no-underline"
               >
                 How to Sell
               </a>
@@ -127,7 +127,7 @@ const FooterL = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-white transition no-underline"
+                className="text-white transition no-underline"
               >
                 FAQ
               </a>
@@ -161,7 +161,7 @@ const FooterL = () => {
       <div className="border-t border-gray-800 mt-10 pt-6 px-6">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
           <p>
-            ©Copyright 2024 <span className="text-white">AuctionHere</span> | Design
+            ©Copyright 2024 <span className="text-white">BidThic</span> | Design
             By Egens Lab
           </p>
           <ul className="flex space-x-4 mt-4 md:mt-0">

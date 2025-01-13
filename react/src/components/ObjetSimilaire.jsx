@@ -23,7 +23,7 @@ const ObjetSimilaire = () => {
   return (
     <section className="mx-auto relative ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-4">Découvrez des enchères similaires!</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">Discover other bids you may like!</h2>
      
         <Swiper className=''
           modules={[Navigation, Autoplay]} // Inclure le module Autoplay
@@ -42,11 +42,13 @@ const ObjetSimilaire = () => {
           }}
         >
           {objets2.map((objet) => (
-            <SwiperSlide key={objet.id} className=''>
+            objet.etat !== 'termine' ? (
+              <SwiperSlide key={objet.id} className="">
                 <div className="swiper-slide-content">
-                    <Objet objet={objet}></Objet>
+                  <Objet objet={objet} />
                 </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            ) : null
           ))}
         </Swiper>
       </div>

@@ -13,12 +13,12 @@ export const Footer = () => {
   
             {/* Menu */}
             <div>
-              <h3 className="text-white font-medium">Menu</h3>
-              <ul className="mt-4 space-y-2">
-                <li>
+              <ul className=" space-y-2">
+              <h3 className="text-white  w-fit text-justify font-medium mb-4">Menu</h3>
+                <li className="text-white">
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     Bids Historic
                   </a>
@@ -26,7 +26,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50  no-underline duration-300 hover:text-teal-400"
                   >
                     Pieces Catalog
                   </a>
@@ -34,7 +34,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     Departments
                   </a>
@@ -42,7 +42,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     Contact
                   </a>
@@ -52,12 +52,12 @@ export const Footer = () => {
   
             {/* Resources */}
             <div>
-              <h3 className="text-white font-medium">Resources</h3>
-              <ul className="mt-4 space-y-2">
+              <ul className=" space-y-2">
+                <h3 className="text-white font-medium mb-4">Resources</h3>
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     Blog
                   </a>
@@ -65,7 +65,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     About us
                   </a>
@@ -73,7 +73,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     How to bid
                   </a>
@@ -81,7 +81,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     How to sell
                   </a>
@@ -89,7 +89,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="/"
-                    className="transition-colors duration-300 hover:text-teal-400"
+                    className="transition-colors text-teal-50 no-underline duration-300 hover:text-teal-400"
                   >
                     F.A.Q
                   </a>
@@ -120,33 +120,33 @@ export const Footer = () => {
           </div>
   
           {/* Footer Bottom */}
-          <div className="flex flex-col justify-between pt-5 mt-10 border-t border-gray-800 sm:flex-row">
+          <div className="flex flex-col justify-between items-center pt-5 mt-10 border-t border-gray-800 sm:flex-row">
             <p className="text-sm text-gray-500">
               © Copyright 2024 BidThic.All rights reserved.
             </p>
-            <div className="flex items-center mt-4 space-x-4 sm:mt-0">
+            <div className="flex items-center mb-3 mt-4 space-x-4 sm:mt-0">
               {/* Social Media Icons */}
               <a
                 href="/"
-                className="text-gray-500 transition-colors duration-300 hover:text-teal-400"
+                className="text-gray-500 no-underline  transition-colors duration-300 hover:text-teal-400"
               >
                 Facebook
               </a>
               <a
                 href="/"
-                className="text-gray-500 transition-colors duration-300 hover:text-teal-400"
+                className="text-gray-500   no-underline transition-colors duration-300 hover:text-teal-400"
               >
                 Instagram
               </a>
               <a
                 href="/"
-                className="text-gray-500 transition-colors duration-300 hover:text-teal-400"
+                className="text-gray-500  no-underline transition-colors duration-300 hover:text-teal-400"
               >
                 LinkedIn
               </a>
               <a
                 href="/"
-                className="text-gray-500 transition-colors duration-300 hover:text-teal-400"
+                className="text-gray-500  no-underline transition-colors duration-300 hover:text-teal-400"
               >
                 Twitter
               </a>

@@ -4,8 +4,8 @@ import { userStateContext } from '../contexts/ContextProvider';
 
 const AddObjet = () => {
     const { userToken, setCurrentUser, currentUser } = userStateContext();
-    const [messageErreur, setMessageErreur] = useState("");
-    const [messageSuccess, setMessageSuccess] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     console.log(userToken);
     console.log(currentUser.id);
@@ -18,7 +18,7 @@ const AddObjet = () => {
             'Authorization': `Bearer ${userToken}`,
         });
 
-        // Envoi de la requête à l'API avec le token
+        // Send the request to the API with the token
         axiosClient.get('/me', {
             headers: {
                 'Authorization': `Bearer ${userToken}`,
@@ -35,26 +35,26 @@ const AddObjet = () => {
 
 
     const [formData, setFormData] = useState({
-        titre: "",
+        title: "",
         description: "",
         image: "",
         address: "",
-        prixInitial: "",
-        prixActuel: "",
-        dateDepart: "",
-        dateFin: "",
-        vendeur_id: "",
+        initialPrice: "",
+        currentPrice: "",
+        startDate: "",
+        endDate: "",
+        seller_id: "",
     });
 
-    const calculerEtat = (dateDepart, dateFin) => {
+    const calculateStatus = (startDate, endDate) => {
         const today = new Date();
-        const startDate = new Date(dateDepart);
-        const endDate = new Date(dateFin);
+        const start = new Date(startDate);
+        const end = new Date(endDate);
 
-        if (startDate > today) return "en_attente";
-        if (startDate <= today && endDate >= today) return "en_cours";
-        if (endDate < today) return "termine";
-        return "en_attente";
+        if (start > today) return "pending";
+        if (start <= today && end >= today) return "ongoing";
+        if (end < today) return "finished";
+        return "pending";
     };
 
     const handleChange = (e) => {
@@ -68,59 +68,59 @@ const AddObjet = () => {
     useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            prixActuel: prevData.prixInitial,
+            currentPrice: prevData.initialPrice,
         }));
-    }, [formData.prixInitial]);
+    }, [formData.initialPrice]);
 
     useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            vendeur_id: currentUser.id,
+            seller_id: currentUser.id,
         }));
     }, [currentUser.id]);
 
 
 
     const handleSubmit = async (e) => {
-        setMessageErreur("");
-        setMessageSuccess('');
+        setErrorMessage("");
+        setSuccessMessage('');
         e.preventDefault();
 
 
-        const etat = calculerEtat(formData.dateDepart, formData.dateFin);
-        const dataToSubmit = { ...formData, etat };
+        const status = calculateStatus(formData.startDate, formData.endDate);
+        const dataToSubmit = { ...formData, status };
         console.log(dataToSubmit);
 
         try {
-            const response = await axiosClient.post("/objets/add", dataToSubmit, {
+            const response = await axiosClient.post("/objects/add", dataToSubmit, {
                 headers: {
                     Authorization: `Bearer ${userToken}`,
-                    'Content-Type': 'application/json', // Ajout du Content-Type
+                    'Content-Type': 'application/json', // Added Content-Type
 
                 },
             });
 
             if (response.status === 201) {
-                setMessageSuccess("Données insérées avec succès !");
+                setSuccessMessage("Data added successfully!");
                 window.scrollTo(0, 0);
                 setFormData({
-                    titre: "",
+                    title: "",
                     description: "",
                     image: "",
                     address: "",
-                    prixInitial: "",
-                    prixActuel: "",
-                    dateDepart: "",
-                    dateFin: "",
-                    vendeur_id: currentUser.id || "", // Remettre l'ID de l'utilisateur pour la prochaine soumission
+                    initialPrice: "",
+                    currentPrice: "",
+                    startDate: "",
+                    endDate: "",
+                    seller_id: currentUser.id || "", // Set the user ID for the next submission
                 });
             } else {
-                setMessageErreur(`Erreur : ${response.data.message}`);
+                setErrorMessage(`Error: ${response.data.message}`);
                 window.scrollTo(0, 0);
             }
         } catch (error) {
-            console.error("Erreur lors de l'envoi des données :", error);
-            setMessageErreur("Erreur lors de la connexion au serveur.");
+            console.error("Error sending data:", error);
+            setErrorMessage("Error connecting to the server.");
             window.scrollTo(0, 0);
         }
     };
@@ -128,9 +128,8 @@ const AddObjet = () => {
     return (
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
             <div className="container max-w-screen-lg mx-auto">
-                <h2 className="font-semibold text-4xl text-gray-900 mb-3">Ajouter une pièce</h2>
-                {messageErreur && (
-
+                <h2 className="font-semibold text-4xl text-gray-900 mb-3">Add an Item</h2>
+                {errorMessage && (
                     <div class="relative items-center w-full mb-3 mx-auto md:px-12 lg:px-24 max-w-7xl">
                         <div class="p-6 border-l-4 border-red-500 -6 rounded-r-xl bg-red-50">
                             <div class="flex">
@@ -141,15 +140,15 @@ const AddObjet = () => {
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm text-red-600">
-                                        <p>{messageErreur}</p>
+                                        <p>{errorMessage}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 )}
-                {messageSuccess && (
-                    <div class="relative items-center w-full mb-3    max-w-7xl ">
+                {successMessage && (
+                    <div class="relative items-center w-full mb-3 max-w-7xl">
                         <div class="p-6 border-l-4 border-green-500 -6 rounded-r-xl bg-green-50">
                             <div class="flex">
                                 <div class="flex-shrink-0">
@@ -159,7 +158,7 @@ const AddObjet = () => {
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm text-green-600">
-                                        <p>{messageSuccess}</p>
+                                        <p>{successMessage}</p>
                                     </div>
                                 </div>
                             </div>
@@ -179,15 +178,15 @@ const AddObjet = () => {
 
                         <div className="lg:col-span-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 p-4 px-4 md:p-8">
                             <div className="md:col-span-5">
-                                <label htmlFor="titre">Titre</label>
+                                <label htmlFor="title">Title</label>
                                 <input
                                     type="text"
-                                    name="titre"
-                                    id="titre"
-                                    value={formData.titre}
+                                    name="title"
+                                    id="title"
+                                    value={formData.title}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                    placeholder="Entrez le titre de l'article"
+                                    placeholder="Enter the title of the item"
                                     required
                                 />
                             </div>
@@ -201,7 +200,7 @@ const AddObjet = () => {
                                     value={formData.description}
                                     onChange={handleChange}
                                     className="h-28 border mt-1 rounded px-4 w-full bg-gray-50"
-                                    placeholder="Entrez une description détaillée"
+                                    placeholder="Enter a detailed description"
                                 ></textarea>
                             </div>
 
@@ -215,12 +214,12 @@ const AddObjet = () => {
                                     onChange={handleChange}
                                     className="h-10 mt-2 border px-4 rounded w-full bg-gray-50"
                                     required
-                                    placeholder="Entrer l'url de votre image"
+                                    placeholder="Enter the URL of your image"
                                 />
                             </div>
 
                             <div className="md:col-span-5">
-                                <label htmlFor="address">Adresse</label>
+                                <label htmlFor="address">Address</label>
                                 <textarea
                                     name="address"
                                     id="address"
@@ -228,17 +227,17 @@ const AddObjet = () => {
                                     value={formData.address}
                                     onChange={handleChange}
                                     className="h-20 border mt-1 rounded px-4 w-full bg-gray-50"
-                                    placeholder="Entrez l'adresse"
+                                    placeholder="Enter the address"
                                 ></textarea>
                             </div>
 
                             <div className="md:col-span-3">
-                                <label htmlFor="prixInitial">Prix Initial (€)</label>
+                                <label htmlFor="initialPrice">Initial Price ($)</label>
                                 <input
                                     type="number"
-                                    name="prixInitial"
-                                    id="prixInitial"
-                                    value={formData.prixInitial}
+                                    name="initialPrice"
+                                    id="initialPrice"
+                                    value={formData.initialPrice}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                     placeholder="0.00"
@@ -250,12 +249,12 @@ const AddObjet = () => {
 
 
                             <div className="md:col-span-3">
-                                <label htmlFor="dateDepart">Date de Départ</label>
+                                <label htmlFor="startDate">Start Date</label>
                                 <input
                                     type="datetime-local"
-                                    name="dateDepart"
-                                    id="dateDepart"
-                                    value={formData.dateDepart}
+                                    name="startDate"
+                                    id="startDate"
+                                    value={formData.startDate}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                     required
@@ -263,12 +262,12 @@ const AddObjet = () => {
                             </div>
 
                             <div className="md:col-span-2">
-                                <label htmlFor="dateFin">Date de Fin</label>
+                                <label htmlFor="endDate">End Date</label>
                                 <input
                                     type="datetime-local"
-                                    name="dateFin"
-                                    id="dateFin"
-                                    value={formData.dateFin}
+                                    name="endDate"
+                                    id="endDate"
+                                    value={formData.endDate}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                     required
@@ -281,7 +280,7 @@ const AddObjet = () => {
                                     type="submit"
                                     className="bg-slate-950 hover:bg-slate-200 text-gray-50 hover:text-gray-950 border-1 border-gray-950 transition-all duration-300 font-bold py-2 px-4 rounded"
                                 >
-                                    Soumettre
+                                    Submit
                                 </button>
                             </div>
                         </div>

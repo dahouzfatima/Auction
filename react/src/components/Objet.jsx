@@ -69,6 +69,7 @@ export default function Objet({ objet }) {
             console.error(error);
         }
     };
+    if(objet.etat === 'termine') return null;
     return (
 
         <>

@@ -129,10 +129,12 @@ public function getUserEncheres($userId)
      */
     public function show($id)
     {
-        // Utilisation de findOrFail pour récupérer l'objet ou renvoyer une erreur 404
-        $objet = Objet::findOrFail($id);
-
-        return response()->json($objet);
+        try {
+            $objet = Objet::findOrFail($id);  
+            return response()->json($objet);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur lors de la récupération de l\'objet.'], 500);
+        }
     }
 
     /**

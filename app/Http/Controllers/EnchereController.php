@@ -6,6 +6,8 @@ use App\Models\Enchere;
 use App\Models\Objet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Events\EncherePlaced; 
+
 
 class EnchereController extends Controller
 {
@@ -68,6 +70,8 @@ class EnchereController extends Controller
 
         // Met à jour le prix actuel de l'objet
         $objet->update(['prixActuel' => $request->prix]);
+
+        //event(new EncherePlaced($enchere));
 
         return response()->json([
             'message' => 'Enchère placée avec succès.',

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ReactPaginate from 'react-paginate';
 import { userStateContext } from "../contexts/ContextProvider";
 import axiosClient from "../axios";
 import { Link, Navigate } from "react-router-dom";

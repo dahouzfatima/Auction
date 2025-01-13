@@ -37,10 +37,10 @@ export default function Header({ SearchTerm, handleSearch }) {
 
     return (
         <header className="bg-white shadow-md">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div className=" mx-auto px-3 md:py-4  flex justify-between items-center">
                 {/* Logo */}
-                <div className="text-3xl font-bold md:ml-10">
-                    <Link to="/">BidThic</Link>
+                <div className="text-3xl no-underline font-bold md:ml-10">
+                    <Link to="/" className="no-underline text-black">BidThic</Link>
                 </div>
 
                 {/* Search Bar */}
@@ -56,44 +56,45 @@ export default function Header({ SearchTerm, handleSearch }) {
                 </div>
 
                 {/* Account and Language */}
-                <div className="flex items-center space-x-4 md:mr-10">
+                <div className="flex items-center  space-x-4 md:mr-10">
                     <div className="text-gray-600 cursor-pointer">English ▾</div>
-                    <div className="cursor-pointer">
-                        <ion-icon name="heart-outline" size="large"></ion-icon>
-                    </div>
-                    <div>
-                        <Link
-                            to="/addObjet"
-                            className="bg-black text-white py-2  hover:underline px-4 rounded-full hover:bg-white hover:text-black border border-black"
-                        >
-                            Add An Item 
-                        </Link>
-                    </div>
-                    <div>
-                        <Link
-                            to="/preview/dashboard"
-                            className="bg-black text-white py-2 px-4 rounded-full hover:bg-white hover:text-black border border-black"
-                        >
-                            Account
-                        </Link>
+                    
+                    <div className=" flex flex-col gap-6 mt-10 md:flex-row md:mt-0">
+                        <button className="">
+                            <Link
+                                to="/addObjet"
+                                className="bg-slate-900 text-slate-50 py-2 no-underline  transition-all duration-100  hover:underline px-4 rounded-full hover:bg-slate-50 hover:text-slate-900 border border-black"
+                            >
+                            Add Item
+                            </Link>
+                        </button>
+                    
+                        <button>
+                            <Link
+                                to="/preview/dashboard"
+                                className="bg-slate-900 text-slate-50 py-2 no-underline  transition-all duration-100   hover:underline px-4 rounded-full hover:bg-slate-50 hover:text-slate-900 border border-black"
+                            >
+                                Account
+                            </Link>
+                        </button>
                     </div>
                 </div>
             </div>
 
             {/* Navigation Links */}
             <nav className="">
-                <div className="container mx-auto px-4">
+                <div className=" mx-auto -px-1 md:px-4">
                     <ul className="flex space-x-8">
                         {/* Home */}
                         <li className="relative group">
-                            <Link to="/preview" className="py-4 block hover:text-primary">
+                            <Link to="/preview" className="py-4 block no-underline text-black hover:text-primary">
                                 Home
                             </Link>
                         </li>
 
                         {/* Contact */}
                         <li className="relative group">
-                            <Link to="/contact" className="py-4 block hover:text-primary">
+                            <Link to="/contact" className="py-4 no-underline text-black block hover:text-primary">
                                 Contact
                             </Link>
                         </li>
@@ -113,10 +114,10 @@ export default function Header({ SearchTerm, handleSearch }) {
                                         {links[0].sublinks.map((item) => (
                                             <li
                                                 key={item.name}
-                                                className="px-4 py-2 hover:bg-gray-100"
+                                                className=" py-2 no-underline text-gray-600 hover:bg-gray-100"
                                             >
 
-                                                <Link to={item.link} className="block text-gray-700">
+                                                <Link to={item.link} className="block no-underline text-gray-700">
                                                     {item.name}
                                                 </Link>
                                             </li>

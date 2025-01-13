@@ -15,10 +15,10 @@ function Sidebar({ setActiveComponent }) {
     return (
         <div className="flex flex-col p-4 border border-gray-200">
             <div className="flex flex-col space-y-10">
-                <div className="inline-flex items-center group hover:bg-black border border-gray-200 px-3 py-1 cursor-pointer w-fit sm:w-auto" onClick={() => setActiveComponent("Dashboard")}>
+                <div className="flex  flex-row   group hover:bg-black border border-gray-200 px-3 py-1 cursor-pointer w-fit sm:w-auto" onClick={() => setActiveComponent("Dashboard")}>
                     <i className="bx bxs-dashboard text-2xl sm:text-4xl group-hover:text-white sm:mr-3"></i>
                     <p
-                        className="group-hover:text-white hidden sm:inline-block  text-xl font-roboto leading-relaxed"
+                        className="group-hover:text-white  hidden sm:inline-block  text-xl font-roboto leading-relaxed"
                     >
                         Dashboard
                     </p>
