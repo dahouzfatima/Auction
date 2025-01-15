@@ -545,6 +545,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Console\\Commands\\CheckExpiredObjects' => __DIR__ . '/../..' . '/app/Console/Commands/CheckExpiredObjects.php',
         'App\\Console\\Commands\\UpdateObjectState' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateObjectState.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\EncherePlaced' => __DIR__ . '/../..' . '/app/Events/EncherePlaced.php',
+        'App\\Events\\ObjectUpdated' => __DIR__ . '/../..' . '/app/Events/ObjectUpdated.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',

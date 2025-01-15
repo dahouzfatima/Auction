@@ -29,8 +29,5 @@ while (true) {
         // Afficher une erreur si quelque chose ne va pas
         echo "Error: " . $e->getMessage() . "\n";
     }
-
-    // Attendre un certain temps avant de relancer la commande
-    sleep(60); // Attendre 60 secondes
     echo "Scheduler loop running...\n";  // Message pour indiquer que la boucle continue
 }

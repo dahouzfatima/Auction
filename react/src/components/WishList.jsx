@@ -55,10 +55,10 @@ export default function Wishlist() {
                                 <td className={`border border-gray-300 px-4 py-2 ${wish.etat === 'termine' ? 'text-green-600' : 'text-red-600'}`}>
                                     {wish.etat}
                                 </td>
-                                <td className="border border-gray-300 px-2 py-1">
-                                <Link to={`/details/${wish.id}`} >
-                                    <button class="bg-white text-black py-2 px-4    border border-black rounded hover:bg-black hover:text-white ">Start a Bid</button>
-                                </Link>
+                                <td className="border border-gray-300 text-center">
+                                    <Link to={`/details/${wish.id}`} >
+                                        <button class="hover:underline text-slate-950 py-2 px-2  border border-black rounded hover:bg-slate-950 hover:text-slate-50 ">Start a Bid</button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

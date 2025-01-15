@@ -9,6 +9,8 @@ return array(
     'App\\Console\\Commands\\CheckExpiredObjects' => $baseDir . '/app/Console/Commands/CheckExpiredObjects.php',
     'App\\Console\\Commands\\UpdateObjectState' => $baseDir . '/app/Console/Commands/UpdateObjectState.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Events\\EncherePlaced' => $baseDir . '/app/Events/EncherePlaced.php',
+    'App\\Events\\ObjectUpdated' => $baseDir . '/app/Events/ObjectUpdated.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

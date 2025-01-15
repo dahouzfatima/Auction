@@ -45,7 +45,7 @@ const ObjetSimilaire = () => {
             objet.etat !== 'termine' ? (
               <SwiperSlide key={objet.id} className="">
                 <div className="swiper-slide-content">
-                  <Objet objet={objet} />
+                  <Objet objet={objet}  similaire={true}/>
                 </div>
               </SwiperSlide>
             ) : null

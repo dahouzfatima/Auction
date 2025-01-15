@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('objects:check-expired')->everyMinute(); // Exécution chaque heure
+        $schedule->command('objects:check-expired')->everyMinute(); 
         $schedule->command('command:update-object-state')->everyMinute();
     }
 

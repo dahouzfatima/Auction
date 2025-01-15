@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React,{ useEffect, useState }  from "react";
 import axiosClient from "../axios";
 import { userStateContext } from '../contexts/ContextProvider';
 
 const AddObjet = () => {
     const { userToken, setCurrentUser, currentUser } = userStateContext();
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
+    const [messageErreur, setMessageErreur] = useState("");
+    const [messageSuccess, setMessageSuccess] = useState("");
 
     console.log(userToken);
     console.log(currentUser.id);
@@ -18,7 +18,7 @@ const AddObjet = () => {
             'Authorization': `Bearer ${userToken}`,
         });
 
-        // Send the request to the API with the token
+        // Envoi de la requête à l'API avec le token
         axiosClient.get('/me', {
             headers: {
                 'Authorization': `Bearer ${userToken}`,
@@ -35,26 +35,26 @@ const AddObjet = () => {
 
 
     const [formData, setFormData] = useState({
-        title: "",
+        titre: "",
         description: "",
         image: "",
         address: "",
-        initialPrice: "",
-        currentPrice: "",
-        startDate: "",
-        endDate: "",
-        seller_id: "",
+        prixInitial: "",
+        prixActuel: "",
+        dateDepart: "",
+        dateFin: "",
+        vendeur_id: "",
     });
 
-    const calculateStatus = (startDate, endDate) => {
+    const calculerEtat = (dateDepart, dateFin) => {
         const today = new Date();
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+        const startDate = new Date(dateDepart);
+        const endDate = new Date(dateFin);
 
-        if (start > today) return "pending";
-        if (start <= today && end >= today) return "ongoing";
-        if (end < today) return "finished";
-        return "pending";
+        if (startDate > today) return "en_attente";
+        if (startDate <= today && endDate >= today) return "en_cours";
+        if (endDate < today) return "termine";
+        return "en_attente";
     };
 
     const handleChange = (e) => {
@@ -68,59 +68,59 @@ const AddObjet = () => {
     useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            currentPrice: prevData.initialPrice,
+            prixActuel: prevData.prixInitial,
         }));
-    }, [formData.initialPrice]);
+    }, [formData.prixInitial]);
 
     useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            seller_id: currentUser.id,
+            vendeur_id: currentUser.id,
         }));
     }, [currentUser.id]);
-
-
+    
+    
 
     const handleSubmit = async (e) => {
-        setErrorMessage("");
-        setSuccessMessage('');
+        setMessageErreur("");
+        setMessageSuccess('');
         e.preventDefault();
 
 
-        const status = calculateStatus(formData.startDate, formData.endDate);
-        const dataToSubmit = { ...formData, status };
+        const etat = calculerEtat(formData.dateDepart, formData.dateFin);
+        const dataToSubmit = { ...formData, etat };
         console.log(dataToSubmit);
 
         try {
-            const response = await axiosClient.post("/objects/add", dataToSubmit, {
+            const response = await axiosClient.post("/objets/add", dataToSubmit, {
                 headers: {
                     Authorization: `Bearer ${userToken}`,
-                    'Content-Type': 'application/json', // Added Content-Type
+                    'Content-Type': 'application/json', // Ajout du Content-Type
 
                 },
             });
 
             if (response.status === 201) {
-                setSuccessMessage("Data added successfully!");
+                setMessageSuccess("Données insérées avec succès !");
                 window.scrollTo(0, 0);
                 setFormData({
-                    title: "",
+                    titre: "",
                     description: "",
                     image: "",
-                    address: "",
-                    initialPrice: "",
-                    currentPrice: "",
-                    startDate: "",
-                    endDate: "",
-                    seller_id: currentUser.id || "", // Set the user ID for the next submission
+                    address:"",
+                    prixInitial: "",
+                    prixActuel: "",
+                    dateDepart: "",
+                    dateFin: "",
+                    vendeur_id: currentUser.id || "", // Remettre l'ID de l'utilisateur pour la prochaine soumission
                 });
             } else {
-                setErrorMessage(`Error: ${response.data.message}`);
+                setMessageErreur(`Erreur : ${response.data.message}`);
                 window.scrollTo(0, 0);
             }
         } catch (error) {
-            console.error("Error sending data:", error);
-            setErrorMessage("Error connecting to the server.");
+            console.error("Erreur lors de l'envoi des données :", error);
+            setMessageErreur("Erreur lors de la connexion au serveur.");
             window.scrollTo(0, 0);
         }
     };
@@ -128,42 +128,44 @@ const AddObjet = () => {
     return (
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
             <div className="container max-w-screen-lg mx-auto">
-                <h2 className="font-semibold text-4xl text-gray-900 mb-3">Add an Item</h2>
-                {errorMessage && (
-                    <div class="relative items-center w-full mb-3 mx-auto md:px-12 lg:px-24 max-w-7xl">
-                        <div class="p-6 border-l-4 border-red-500 -6 rounded-r-xl bg-red-50">
-                            <div class="flex">
-                                <div class="flex-shrink-0">
-                                    <svg class="w-5 h-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <div class="text-sm text-red-600">
-                                        <p>{errorMessage}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h2 className="font-semibold text-4xl text-gray-900 mb-3">Ajouter une pièce</h2>
+                <p className="text-gray-600">Veuillez remplir tous les champs avec précision.</p>
+                {messageErreur && (
+                    
+                     <div class="relative items-center w-full mb-3 mx-auto md:px-12 lg:px-24 max-w-7xl">
+                     <div class="p-6 border-l-4 border-red-500 -6 rounded-r-xl bg-red-50">
+                       <div class="flex">
+                         <div class="flex-shrink-0">
+                           <svg class="w-5 h-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                           </svg>
+                         </div>
+                         <div class="ml-3">
+                           <div class="text-sm text-red-600">
+                             <p>{messageErreur}</p>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
                 )}
-                {successMessage && (
-                    <div class="relative items-center w-full mb-3 max-w-7xl">
-                        <div class="p-6 border-l-4 border-green-500 -6 rounded-r-xl bg-green-50">
-                            <div class="flex">
-                                <div class="flex-shrink-0">
-                                    <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <div class="text-sm text-green-600">
-                                        <p>{successMessage}</p>
-                                    </div>
-                                </div>
-                            </div>
+                {messageSuccess && (
+                    <div class="relative items-center w-full mb-3    max-w-7xl ">
+                    <div class="p-6 border-l-4 border-green-500 -6 rounded-r-xl bg-green-50">
+                      <div class="flex">
+                        <div class="flex-shrink-0">
+                          <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                          </svg>
                         </div>
+                        <div class="ml-3">
+                          <div class="text-sm text-green-600">
+                            <p>{messageSuccess}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 )}
 
                 <form className="bg-white rounded shadow-lg mb-6" onSubmit={handleSubmit}>
@@ -178,15 +180,15 @@ const AddObjet = () => {
 
                         <div className="lg:col-span-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 p-4 px-4 md:p-8">
                             <div className="md:col-span-5">
-                                <label htmlFor="title">Title</label>
+                                <label htmlFor="titre">Titre</label>
                                 <input
                                     type="text"
-                                    name="title"
-                                    id="title"
-                                    value={formData.title}
+                                    name="titre"
+                                    id="titre"
+                                    value={formData.titre}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                    placeholder="Enter the title of the item"
+                                    placeholder="Entrez le titre de l'article"
                                     required
                                 />
                             </div>
@@ -200,7 +202,7 @@ const AddObjet = () => {
                                     value={formData.description}
                                     onChange={handleChange}
                                     className="h-28 border mt-1 rounded px-4 w-full bg-gray-50"
-                                    placeholder="Enter a detailed description"
+                                    placeholder="Entrez une description détaillée"
                                 ></textarea>
                             </div>
 
@@ -214,12 +216,12 @@ const AddObjet = () => {
                                     onChange={handleChange}
                                     className="h-10 mt-2 border px-4 rounded w-full bg-gray-50"
                                     required
-                                    placeholder="Enter the URL of your image"
+                                    placeholder="Entrer l'url de votre image"
                                 />
                             </div>
 
                             <div className="md:col-span-5">
-                                <label htmlFor="address">Address</label>
+                                <label htmlFor="address">Adresse</label>
                                 <textarea
                                     name="address"
                                     id="address"
@@ -227,17 +229,17 @@ const AddObjet = () => {
                                     value={formData.address}
                                     onChange={handleChange}
                                     className="h-20 border mt-1 rounded px-4 w-full bg-gray-50"
-                                    placeholder="Enter the address"
+                                    placeholder="Entrez l'adresse"
                                 ></textarea>
                             </div>
 
                             <div className="md:col-span-3">
-                                <label htmlFor="initialPrice">Initial Price ($)</label>
+                                <label htmlFor="prixInitial">Prix Initial (€)</label>
                                 <input
                                     type="number"
-                                    name="initialPrice"
-                                    id="initialPrice"
-                                    value={formData.initialPrice}
+                                    name="prixInitial"
+                                    id="prixInitial"
+                                    value={formData.prixInitial}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                     placeholder="0.00"
@@ -246,15 +248,15 @@ const AddObjet = () => {
                                 />
                             </div>
 
-
+                            
 
                             <div className="md:col-span-3">
-                                <label htmlFor="startDate">Start Date</label>
+                                <label htmlFor="dateDepart">Date de Départ</label>
                                 <input
                                     type="datetime-local"
-                                    name="startDate"
-                                    id="startDate"
-                                    value={formData.startDate}
+                                    name="dateDepart"
+                                    id="dateDepart"
+                                    value={formData.dateDepart}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                     required
@@ -262,12 +264,12 @@ const AddObjet = () => {
                             </div>
 
                             <div className="md:col-span-2">
-                                <label htmlFor="endDate">End Date</label>
+                                <label htmlFor="dateFin">Date de Fin</label>
                                 <input
                                     type="datetime-local"
-                                    name="endDate"
-                                    id="endDate"
-                                    value={formData.endDate}
+                                    name="dateFin"
+                                    id="dateFin"
+                                    value={formData.dateFin}
                                     onChange={handleChange}
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                     required
@@ -280,7 +282,7 @@ const AddObjet = () => {
                                     type="submit"
                                     className="bg-slate-950 hover:bg-slate-200 text-gray-50 hover:text-gray-950 border-1 border-gray-950 transition-all duration-300 font-bold py-2 px-4 rounded"
                                 >
-                                    Submit
+                                    Soumettre
                                 </button>
                             </div>
                         </div>

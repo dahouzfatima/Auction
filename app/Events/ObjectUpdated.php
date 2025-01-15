@@ -36,11 +36,7 @@ class ObjectUpdated implements ShouldBroadcast
         return new Channel('objets');
     }
 
-    /**
-     * Définir les données à diffuser
-     *
-     * @return array
-     */
+   
     public function broadcastWith()
     {
         return [

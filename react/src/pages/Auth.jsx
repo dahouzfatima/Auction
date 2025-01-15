@@ -98,7 +98,7 @@ export default function Authentification() {
                         <button type="submit" className="w-full  font-bold  bg-[#5a3920] h-[48px] text-center cursor-pointer text-white mt-4 rounded-md">
                             Login
                         </button>
-                        <h4 className="text-[#333] mt-[15px] underline">Forget Password ?</h4>
+                        <p className="text-[#333] mt-[15px] underline">Forget Password ?</p>
                     </form>
                 </div>
                 <div className=" toggle-box  absolute w-full h-full flex ">

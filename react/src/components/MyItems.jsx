@@ -53,8 +53,8 @@ export default function MyItems() {
                                 <td className={`border border-gray-300 px-4 py-2 ${sale.etat === 'termine' ? 'text-green-600' : 'text-red-600'}`}>
                                     {sale.etat}
                                 </td>
-                                <td className="border border-gray-300 px-4 py-2">
-                                    <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
+                                <td className="border border-gray-300 px-4 py-2 ">
+                                    <Link to="/preview" className=" text-slate-950 py-2 no-underline hover:underline px-4 rounded-md hover:bg-slate-950 hover:text-slate-50 border border-black">
                                         Preview
                                     </Link>
                                 </td>
@@ -74,53 +74,53 @@ export default function MyItems() {
                             <div>
                                 <strong>Price:</strong> <span className="text-red-800 font-bold">${sale.prixActuel} </span>
                             </div>
-                            <div>
+                            <div className="mb-2">
                                 <strong>Status:</strong>
-                                <span className={sale.etat === 'termine' ? 'text-green-600' : 'text-red-600'}>
+                                <span className={ sale.etat === 'termine' ? 'text-green-600' : 'text-red-600'}>
                                     {sale.etat}
                                 </span>
                             </div>
                             <div>
-                                <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
+                                <Link to="/preview" className=" text-slate-950 py-2 no-underline hover:underline px-4 rounded-md hover:bg-slate-950 hover:text-slate-50 border border-black">
                                     Preview
                                 </Link>
-                            </div>
                         </div>
                     </div>
+                    </div>
                 ))}
-            </div>
-
-            {/* Pagination buttons */}
-            <div className="md:absolute md:bottom-5 md:right-5  flex space-x-1 mt-7 justify-end">
-                <button
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                    disabled={currentPage === 1}
-                    className="border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-black hover:border-black disabled:pointer-events-none disabled:opacity-50"
-                >
-                    Prev
-                </button>
-
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                    <button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={`min-w-9 text-center text-sm transition-all shadow-sm ${currentPage === page
-                            ? "bg-black text-white border border-transparent shadow-md"
-                            : "border border-slate-300 text-slate-600 hover:text-white hover:bg-black hover:border-black"
-                            } ml-2`}
-                    >
-                        {page}
-                    </button>
-                ))}
-
-                <button
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                    disabled={currentPage === totalPages}
-                    className="border border-slate-300 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-black hover:border-black disabled:pointer-events-none disabled:opacity-50"
-                >
-                    Next
-                </button>
-            </div>
         </div>
+
+            {/* Pagination buttons */ }
+    <div className="md:absolute md:bottom-5 md:right-5  flex space-x-1 mt-7 justify-end">
+        <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-black hover:border-black disabled:pointer-events-none disabled:opacity-50"
+        >
+            Prev
+        </button>
+
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+            <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`min-w-9 text-center text-sm transition-all shadow-sm ${currentPage === page
+                    ? "bg-black text-white border border-transparent shadow-md"
+                    : "border border-slate-300 text-slate-600 hover:text-white hover:bg-black hover:border-black"
+                    } ml-2`}
+            >
+                {page}
+            </button>
+        ))}
+
+        <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="border border-slate-300 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-black hover:border-black disabled:pointer-events-none disabled:opacity-50"
+        >
+            Next
+        </button>
+    </div>
+        </div >
     );
 }

@@ -39,7 +39,7 @@ class UpdateObjectState extends Command
      */
     public function handle()
     {
-        $objets = Objet::where('dateDepart', '<=', Carbon::now())  // Date de départ passée
+        $objets = Objet::where('dateDepart', '<=', Carbon::now()) 
                ->where('dateFin', '>', Carbon::now())    
                ->where('etat', '!=', 'en_cours')        
                ->get();

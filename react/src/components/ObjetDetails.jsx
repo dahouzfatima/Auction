@@ -30,6 +30,7 @@ const ObjetDetails = () => {
         })
             .then(({ data }) => {
                 setObjet(data);
+                setEtat(objet.etat);
             })
             .catch((error) => {
                 console.error("Erreur lors de la récupération des ventes:", error);
@@ -42,12 +43,12 @@ const ObjetDetails = () => {
 
         fetchObjetDetails();
 
-    }, [id]);
+    }, [id,etat]);
     useEffect(() => {
         Pusher.logToConsole = true;
     
-        const pusher = new Pusher("a636b18912ce29b6e934", {
-          cluster: "ap2",
+        const pusher = new Pusher("1b937d7175823b863542", {
+          cluster: "eu",
         });
     
         const channel = pusher.subscribe(`enchere.${id}`);
@@ -81,7 +82,6 @@ const ObjetDetails = () => {
                 const startDate = new Date(objet.dateDepart);
                 console.log(startDate);
                 const diff = endDate - now; // Différence en millisecondes
-                console.log(diff)
                 const diffUpcoming = startDate - now;
                 console.log(diffUpcoming);
                 if (diffUpcoming > 0) {
@@ -102,6 +102,10 @@ const ObjetDetails = () => {
                 } else {
                     setTimeLeft("Auction Ended"); // Si la date est dépassée
                 }
+                if(diffUpcoming<=0){
+                    setEtat('en_cours');
+                }
+                
             };
             setBid(objet.prixActuel + 1);
             // Mettre à jour toutes les secondes
@@ -110,7 +114,7 @@ const ObjetDetails = () => {
             // Nettoyer l'intervalle lorsqu'on quitte le composant
             return () => clearInterval(timer);
         }
-    }, [objet])
+    }, [objet,etat])
 
     // Fonction pour placer une enchère
     const placeBid = async () => {

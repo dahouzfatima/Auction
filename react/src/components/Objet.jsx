@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { userStateContext } from "../contexts/ContextProvider";
 import axiosClient from "../axios";
 
-export default function Objet({ objet }) {
+export default function Objet({ objet,similaire}) {
     const { currentUser, userToken } = userStateContext();
     const [timeLeft, setTimeLeft] = useState("");
     const [isInWishlist, setIsInWishlist] = useState(false);
@@ -102,9 +102,21 @@ export default function Objet({ objet }) {
                         <span className=" text-gray-500 mr-2">Current Bidding:</span><span class="font-semibold text-xl">{objet.prixActuel}$</span>
                     </div>
                     <div className=" flex ">
+                    {!similaire &&(
                         <Link to={`/details/${objet.id}`} >
-                            <button class="bg-white text-black py-2 px-4 mt-5   border border-black rounded hover:bg-black hover:text-white ">Start a Bid</button>
+                        <button class="text-slate-950 py-2 px-4 mt-5   border border-black rounded hover:bg-slate-950 hover:text-slate-50"
+                         onClick={() => window.scrollTo(-100, 0)}
+                        >
+                        Start a Bid</button>
+                    </Link>
+                    )}
+                    {similaire &&(
+                        <Link to={`/details/${objet.id}`} >
+                        <button class=" text-slate-950 py-2 px-4 mt-5   border border-black rounded hover:bg-slate-950 hover:text-slate-50"
+                        onClick={() => window.scrollTo(0, 0)}>
+                        Start a Bid</button>
                         </Link>
+                    )}
                     </div>
                 </div>
             </div>

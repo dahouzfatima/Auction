@@ -22,11 +22,7 @@ class EncherePlaced implements ShouldBroadcast
     {
         return new Channel('enchere.' . $this->enchere->objet_id);
     }
-    /**
-     * Les données transmises avec l'événement.
-     *
-     * @return array
-     */
+    
     public function broadcastWith()
     {
         return [

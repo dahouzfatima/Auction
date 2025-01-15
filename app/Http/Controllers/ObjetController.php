@@ -23,6 +23,7 @@ class ObjetController extends Controller
         $query->where('titre', 'like', '%' . $search . '%');
         }
         $currentUserId = $request->input('id'); 
+
         $query->where('vendeur_id', '!=', $currentUserId);
         $objets = $query->where('etat', '!=', 'termine')->paginate(8);
        return response()->json($objets);
@@ -40,7 +41,6 @@ class ObjetController extends Controller
 }
 public function store(Request $request)
     {
-         // Validation des données
          $validated = $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
@@ -54,13 +54,12 @@ public function store(Request $request)
             'vendeur_id' => 'required|exists:users,id',
         ]);
         //dd($validated);
-        // Création de l'objet dans la base de données
         $objet = Objet::create($validated);
 
         return response()->json([
             'message' => 'Objet créé avec succès.',
             'objet' => $objet
-        ], 201); // Code HTTP 201 pour la création réussie
+        ], 201);
     }
 public function getUserEncheres($userId)
 {
@@ -70,20 +69,15 @@ public function getUserEncheres($userId)
         return response()->json(['message' => 'User not found'], 404);
     }
 
-    // Récupérer les enchères de l'utilisateur avec l'objet associé
     $encheres = $user->encheres()
         ->with(['objet' => function ($query) {
             $query->with(['encheres']);
         }])
-        ->get(); // Récupérer toutes les enchères de l'utilisateur
-
-    // Grouper les enchères par objet_id et récupérer la dernière enchère pour chaque objet
+        ->get();
     $encheresGrouped = $encheres->groupBy('objet_id')->map(function ($group) {
-        // Trier les enchères par date décroissante et récupérer la première (la plus récente)
         return $group->sortByDesc('created_at')->first();
     });
 
-    // Réorganiser les enchères en une collection pour la pagination
     $encheres = new \Illuminate\Pagination\LengthAwarePaginator(
         $encheresGrouped->values(),
         $encheresGrouped->count(),

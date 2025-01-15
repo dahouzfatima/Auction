@@ -24,7 +24,6 @@ class UserController extends Controller
             return response()->json(['error' => 'Utilisateur non authentifié'], 401);
         }
     
-        // Récupérer les ventes de l'utilisateur
         return response()->json([
             'user' => $user,
             'ventes' => $user->ventes, 

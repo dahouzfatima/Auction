@@ -29,7 +29,7 @@ export default function BiddingItems() {
 
     return (
         <div className="flex flex-col">
-            <h1 className="font-bold mb-5 text-xl">All Posted Items</h1>
+            <h1 className="font-bold mb-5 text-xl">All  Items</h1>
             <div className=" hidden md:block">
                 <table className="min-w-full  border-collapse border border-gray-200">
                     <thead>
@@ -55,7 +55,7 @@ export default function BiddingItems() {
                                     {sale.objet.etat === 'en_cours' ? sale.objet.etat : sale.objet.etat === 'termine' && sale.prix >= sale.objet.prixActuel ? 'Win' : 'Cancel'}
                                 </td>
                                 <td className="border border-gray-300 px-4 py-2">
-                                    <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
+                                    <Link to="/preview" className=" text-slate-950 py-2 no-underline hover:underline px-4 rounded-md hover:bg-slate-950 hover:text-slate-50 border border-black">
                                         Preview
                                     </Link>
                                 </td>
@@ -85,7 +85,7 @@ export default function BiddingItems() {
                                 </span>
                             </div>
                             <div>
-                                <Link to="/preview" className="bg-white py-2 px-4 rounded-md hover:bg-black hover:text-white border hover:underline border-black">
+                                <Link to="/preview" className=" text-slate-950 py-2 no-underline hover:underline px-4 rounded-md hover:bg-slate-950 hover:text-slate-50 border border-black">
                                     Preview
                                 </Link>
                             </div>
